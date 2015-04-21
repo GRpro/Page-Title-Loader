@@ -13,14 +13,19 @@ public class Processor {
 
     public static void main(String[] args) {
 
-        if (args.length != 1)
+        if (args.length < 1)
             throw new IllegalArgumentException("wrong input arguments!");
-        WebDriver webDriver = new FirefoxDriver();
 
+        String s = "";
+        for (String arg : args) {
+            s = s.concat(arg + " ");
+        }
+
+        WebDriver webDriver = new FirefoxDriver();
         webDriver.get("http://www.google.com");
 
         WebElement element1 = webDriver.findElement(By.name("q"));
-        element1.sendKeys(args[0]);
+        element1.sendKeys(s);
         element1.submit();
 
         // wait until the google page shows the result
